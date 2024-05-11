@@ -1,13 +1,18 @@
+// Importa las dependencias necesarias
 import { createApp } from 'vue'
 import App from './App.vue'
 import vuetify from './plugins/vuetify'
-import { loadFonts } from './plugins/webfontloader'
-import custom_axios from './plugins/axios'
-import VueAxios from 'vue-axios'
+import router from './plugins/router'
 
-loadFonts()
 
-createApp(App)
-  .use(vuetify)
-  .use(VueAxios, custom_axios)
-  .mount('#app')
+// Crea tu aplicación Vue
+const app = createApp(App)
+
+
+// Configura tus plugins y componentes globales
+app.use(vuetify)
+app.use(router)
+
+
+// Monta tu aplicación
+app.mount('#app')
