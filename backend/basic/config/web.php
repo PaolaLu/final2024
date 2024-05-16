@@ -58,7 +58,11 @@ $config = [
                         'apiv1/user',
                         'apiv1/carrera',
                         'apiv1/profesor',
-                        'apiv1/aula'
+                        'apiv1/aula',
+                        'apiv1/materia',
+                        'apiv1/horariomateria',
+                        'apiv1/reservaaula'
+
                         ]
                 ],
             ],
