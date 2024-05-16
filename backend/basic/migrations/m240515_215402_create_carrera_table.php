@@ -13,7 +13,7 @@ class m240515_215402_create_carrera_table extends Migration
     public function safeUp()
     {
         $this->createTable('{{%carrera}}', [
-            'id' => $this->primaryKey(),
+          
             'id' => $this->primaryKey(),
             'nombre' => $this->string(128)->notNull(),
         ]);
