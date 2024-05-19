@@ -39,8 +39,9 @@
 	data: () => ({
   	items: [
     	{ title: "Home", icon: "mdi-view-dashboard",to: '/' },
-		{ title: "About", icon: "mdi-view-dashboard" ,to: '/about' },
+		{ title: "Carreras", icon: "mdi-view-dashboard" ,to: '/carreras' },
 		{ title: "Aulas", icon: "mdi-view-dashboard" ,to: '/aulas' },
+		{ title: "Profesores", icon: "mdi-view-dashboard" ,to: '/profesores' },
 	],
 	}),
 	mounted() {},

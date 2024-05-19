@@ -1,8 +1,10 @@
-import axios from 'axios'
+// src/plugins/axios.js
+import axios from 'axios';
 
-axios.defaults.baseURL = "http://127.0.0.1:8000";
-
-const custom_axios = axios;
-
+const custom_axios = axios.create({
+  baseURL: 'http://127.0.0.1:8000',
+});
 
 export default custom_axios;
+
+

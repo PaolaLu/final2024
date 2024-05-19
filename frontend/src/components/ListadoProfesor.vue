@@ -1,38 +1,38 @@
 <template>
     <div>
       <div>
-        <v-btn color="primary" @click="navigateToAbmCarrera">Agregar Carrera</v-btn>
+        <v-btn color="primary" @click="navigateToAbmProfesor">Agregar Profesor</v-btn>
       </div>
   
       <v-data-table
         :headers="headers"
-        :items="listadoCarreras"
+        :items="listadoProfesor"
         height="400"
         item-value="name"
       >
         <template v-slot:item.actions="{ item }">
-          <v-icon @click="editarCarrera(item)" class="mr-2">mdi-pencil</v-icon>
-          <v-icon @click="confirmarEliminarCarrera(item)" class="ml-2">mdi-delete</v-icon>
+          <v-icon @click="editarProfesor(item)" class="mr-2">mdi-pencil</v-icon>
+          <v-icon @click="confirmarEliminarProfesor(item)" class="ml-2">mdi-delete</v-icon>
         </template>
       </v-data-table>
   
-      <v-dialog v-model="mostrarAbmCarreras" max-width="500px" persistent>
-        <AbmCarreras
-          :carrera="carreraSeleccionada"
+      <v-dialog v-model="mostrarAbmProfesor" max-width="500px" persistent>
+        <AbmProfesor
+          :profesor="profesorSeleccionado"
           :editar="editar"
-          @guardar="guardarAbmCarrera"
-          @cancelar="cancelarAbmCarrera"
+          @guardar="guardarAbmProfesor"
+          @cancelar="cancelarAbmProfesor"
         />
       </v-dialog>
   
       <v-dialog v-model="mostrarConfirmacion" max-width="500px">
         <v-card>
           <v-card-title class="headline">Confirmar Eliminación</v-card-title>
-          <v-card-text>¿Está seguro de que desea eliminar esta carrera?</v-card-text>
+          <v-card-text>¿Está seguro de que desea eliminar el profesor?</v-card-text>
           <v-card-actions>
             <v-spacer></v-spacer>
             <v-btn color="green darken-1" text @click="mostrarConfirmacion = false">Cancelar</v-btn>
-            <v-btn color="red darken-1" text @click="eliminarCarreraConfirmada">Eliminar</v-btn>
+            <v-btn color="red darken-1" text @click="eliminarProfesorConfirmado">Eliminar</v-btn>
           </v-card-actions>
         </v-card>
       </v-dialog>
@@ -41,76 +41,78 @@
   
   <script>
   import custom_axios from '../plugins/axios.js';  
-  import AbmCarreras from './AbmCarrera.vue';
+  import AbmProfesor from './AbmProfesor.vue';
   
   export default {
     components: {
-      AbmCarreras,
+        AbmProfesor,
     },
     data() {
       return {
         headers: [
           { text: 'Id', value: 'id' },
           { text: 'Nombre', value: 'nombre' },
+          { text: 'Apellido', value: 'apellido' },
+          { text: 'Mostrar', value: 'mostrar' },
           { text: 'Acciones', value: 'actions', sortable: false },
         ],
-        listadoCarreras: [],
-        mostrarAbmCarreras: false,
+        listadoProfesor: [],
+        mostrarAbmProfesor: false,
         mostrarConfirmacion: false,
-        carreraSeleccionada: {},
-        carreraAEliminar: null,
+        profesorSeleccionado: {},
+        profesorAEliminar: null,
         editar: false,
       };
     },
     methods: {
-      todasLasCarreras() {
+      todosLosProfesores() {
         custom_axios
-          .get('/apiv1/carrera')
+          .get('/apiv1/profesor')
           .then(response => {
             if (response.status === 200) {
-              this.listadoCarreras = response.data;
+              this.listadoProfesor = response.data;
             }
           })
           .catch(error => {
             console.log(error);
           });
       },
-      navigateToAbmCarrera() {
-        this.$router.push('/abmcarrera');
+      navigateToAbmProfesor() {
+        this.$router.push('/abmprofesor');
       },
-      editarCarrera(item) {
-        this.carreraSeleccionada = { ...item };
+      editarProfesor(item) {
+        this.profesorSeleccionado = { ...item };
         this.editar = true;
-        this.mostrarAbmCarreras = true;
+        this.mostrarAbmProfesor = true;
       },
-      confirmarEliminarCarrera(item) {
-        this.carreraAEliminar = item;
+      confirmarEliminarProfesor(item) {
+        this.profesorAEliminar = item;
         this.mostrarConfirmacion = true;
       },
-      eliminarCarreraConfirmada() {
+      eliminarProfesorConfirmado() {
         custom_axios
-          .delete(`/apiv1/carrera/${this.carreraAEliminar.id}`)
+          .delete(`/apiv1/profesor/${this.profesorAEliminar.id}`)
           .then(response => {
             if (response.status === 204) {
-              this.todasLasCarreras();
+              this.todosLosProfesores();
               this.mostrarConfirmacion = false;
-              this.$router.push('/carreras');
+              this.$router.push('/profesores');
             }
           })
           .catch(error => {
             console.log(error);
           });
       },
-      guardarAbmCarrera() {
-        this.mostrarAbmCarreras = false;
-        this.todasLasCarreras();
+      guardarAbmProfesor() {
+        this.mostrarAbmProfesor = false;
+        this.todosLosProfesores();
       },
-      cancelarAbmCarrera() {
-        this.mostrarAbmCarreras = false;
+      cancelarAbmProfesor() {
+        this.mostrarAbmProfesor = false;
       },
     },
     mounted() {
-      this.todasLasCarreras();
+      this.todosLosProfesores();
     },
   };
   </script>
@@ -123,4 +125,3 @@
     margin-left: 8px;
   }
   </style>
-  
