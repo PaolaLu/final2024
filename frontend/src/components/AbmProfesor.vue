@@ -9,6 +9,7 @@
             :rules="nombreRules"
             required
           ></v-text-field>
+          
           <v-text-field
             v-model="profesorData.apellido"
             label="Apellido"

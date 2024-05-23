@@ -42,7 +42,10 @@
 		{ title: "Carreras", icon: "mdi-view-dashboard" ,to: '/carreras' },
 		{ title: "Aulas", icon: "mdi-view-dashboard" ,to: '/aulas' },
 		{ title: "Profesores", icon: "mdi-view-dashboard" ,to: '/profesores' },
+		{ title: "ReservaAula", icon: "mdi-view-dashboard" ,to: '/reservaaula' },
+		{ title: "HorarioMateria", icon: "mdi-view-dashboard" ,to: '/horariomateria' },
 	],
+
 	}),
 	mounted() {},
 	computed: {},
